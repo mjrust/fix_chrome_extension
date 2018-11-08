@@ -21,7 +21,7 @@ function save_options() {
 // stored in chrome.storage.
 function restore_options() {
   chrome.storage.sync.get({
-    project: 'Sunshine',
+    project: 'Snowstorm',
     user: 'nyx.linden'
   }, function(items) {
     document.getElementById('project').value = items.project;

@@ -1,6 +1,6 @@
 function getJIRAFeed(callback, errorCallback){
     var user = document.getElementById("user").value;
-    if( typeof user === 'undefined') return;
+    if (typeof user === 'undefined') return;
 
     var url = "https://jira.secondlife.com/activity?maxResults=50&streams=user+IS+"+user+"&providers=issues";
     make_request(url, "").then(function(response) {
@@ -57,7 +57,7 @@ function make_request(url, responseType) {
 
 function loadOptions(){
   chrome.storage.sync.get({
-    project: 'Sunshine',
+    project: 'Snowstorm',
     user: 'nyx.linden'
   }, function(items) {
     document.getElementById('project').value = items.project;
