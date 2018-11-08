@@ -73,16 +73,21 @@ function buildJQL(callback) {
   fullCallbackUrl += `project=${project}+and+status=${status}+and+status+changed+to+${status}+before+-${inStatusFor}d&fields=id,status,key,assignee,summary&maxresults=100`;
   callback(fullCallbackUrl);
 }
+
 function createHTMLElementResult(response){
-
-//
-// Create HTML output to display the search results.
-// results.json in the "json_results" folder contains a sample of the API response
-// hint: you may run the application as well if you fix the bug.
-//
-
-  return '<p>There may be results, but you must read the response and display them.</p>';
-
+  if (!response || response.issues.length < 1) return '<p>No Results</p>';
+  let html = '<ul>';
+  const { issues } = response;
+  for (let i = 0; i < issues.length; i++) {
+    const { fields } = issues[i];
+    const { summary, status, assignee } = fields;
+    html += `<div class="ticket-status-result-item">`
+    if (summary)  html += `<li>Summary: ${summary}</li>`;
+    if (status)   html += `<li>Status: <a href="${status.self}"><img src='${status.iconUrl}' height="16" width="16" />${status.name} - ${status.description}</a></li>`;
+    if (assignee) html += `<li>Assignee: <a href="${assignee.self}"><img src='${assignee.avatarUrls['16x16']}' height="16" width="16" /> ${assignee.displayName}</a></li>`;
+    html += `</div>`;
+  }
+  return html += '</ul>';
 }
 
 // utility
