@@ -68,7 +68,7 @@ function buildJQL(callback) {
   var callbackBase = "https://jira.secondlife.com/rest/api/2/search?jql=";
   var project = document.getElementById("project").value;
   var status = document.getElementById("statusSelect").value;
-  var inStatusFor = document.getElementById("daysPast").value
+  var inStatusFor = document.getElementById("daysPast").value || '0';
   var fullCallbackUrl = callbackBase;
   fullCallbackUrl += `project=${project}+and+status=${status}+and+status+changed+to+${status}+before+-${inStatusFor}d&fields=id,status,key,assignee,summary&maxresults=100`;
   callback(fullCallbackUrl);
